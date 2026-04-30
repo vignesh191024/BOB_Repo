@@ -31,19 +31,19 @@ $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
 # Colors for output
-function Write-Success { Write-Host "✓ $args" -ForegroundColor Green }
-function Write-Info { Write-Host "ℹ $args" -ForegroundColor Cyan }
-function Write-Warning { Write-Host "⚠ $args" -ForegroundColor Yellow }
-function Write-Error { Write-Host "✗ $args" -ForegroundColor Red }
+function Write-Success { Write-Host "[+] $args" -ForegroundColor Green }
+function Write-Info { Write-Host "[*] $args" -ForegroundColor Cyan }
+function Write-Warning { Write-Host "[!] $args" -ForegroundColor Yellow }
+function Write-Error { Write-Host "[-] $args" -ForegroundColor Red }
 function Write-Header { Write-Host "`n=== $args ===" -ForegroundColor Magenta }
 
 # Get script directory
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $SandboxRoot = Split-Path -Parent $ScriptDir
 
-Write-Host "`n╔════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║   Bob Sandbox Cleanup Script               ║" -ForegroundColor Cyan
-Write-Host "╚════════════════════════════════════════════╝`n" -ForegroundColor Cyan
+Write-Host "`n======================================" -ForegroundColor Cyan
+Write-Host "Bob Sandbox Cleanup Script" -ForegroundColor Cyan
+Write-Host "======================================`n" -ForegroundColor Cyan
 
 if ($Full) {
     Write-Warning "Full cleanup mode enabled - will remove build artifacts"
@@ -234,20 +234,20 @@ if ($allPreserved) {
 Write-Header "Cleanup Summary"
 
 Write-Host "`nCleaned:"
-Write-Host "  ✓ Test artifacts" -ForegroundColor Green
-Write-Host "  ✓ Test projects" -ForegroundColor Green
-Write-Host "  ✓ Temporary files" -ForegroundColor Green
+Write-Host "  [+] Test artifacts" -ForegroundColor Green
+Write-Host "  [+] Test projects" -ForegroundColor Green
+Write-Host "  [+] Temporary files" -ForegroundColor Green
 if ($Full) {
-    Write-Host "  ✓ MCP server builds" -ForegroundColor Green
+    Write-Host "  [+] MCP server builds" -ForegroundColor Green
 }
 
 Write-Host "`nPreserved:"
-Write-Host "  ✓ Custom modes configuration" -ForegroundColor Cyan
-Write-Host "  ✓ Documentation" -ForegroundColor Cyan
-Write-Host "  ✓ Test scenario templates" -ForegroundColor Cyan
-Write-Host "  ✓ Scripts" -ForegroundColor Cyan
+Write-Host "  [+] Custom modes configuration" -ForegroundColor Cyan
+Write-Host "  [+] Documentation" -ForegroundColor Cyan
+Write-Host "  [+] Test scenario templates" -ForegroundColor Cyan
+Write-Host "  [+] Scripts" -ForegroundColor Cyan
 if (-not $Full) {
-    Write-Host "  ✓ MCP server builds" -ForegroundColor Cyan
+    Write-Host "  [+] MCP server builds" -ForegroundColor Cyan
 }
 
 # Step 7: Next Steps
@@ -277,9 +277,10 @@ To start testing:
 "@ -ForegroundColor White
 }
 
-Write-Host "╔════════════════════════════════════════════╗" -ForegroundColor Green
-Write-Host "║   Cleanup Complete! ✓                      ║" -ForegroundColor Green
-Write-Host "╚════════════════════════════════════════════╝`n" -ForegroundColor Green
+Write-Host "======================================" -ForegroundColor Green
+Write-Host "Cleanup Complete!" -ForegroundColor Green
+Write-Host "======================================" -ForegroundColor Green
+Write-Host ""
 
 exit 0
 
