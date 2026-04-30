@@ -170,6 +170,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     switch (name) {
       case "add": {
+        if (!args || !args.numbers) {
+          throw new Error("Missing required argument: numbers");
+        }
         const numbers = args.numbers as number[];
         const result = numbers.reduce((sum, num) => sum + num, 0);
         addToHistory("add", numbers, result);
@@ -200,6 +203,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case "multiply": {
+        if (!args || !args.numbers) {
+          throw new Error("Missing required argument: numbers");
+        }
         const numbers = args.numbers as number[];
         const result = numbers.reduce((product, num) => product * num, 1);
         addToHistory("multiply", numbers, result);
